@@ -23,7 +23,7 @@ class RomanNumeral{
 	}
 
 
-	public String getRomanNumeral(){
+	public String getRomanNumeral() throws IllegalArgumentException{
 		Integer aN = arabicNumeral;
 		List<Integer> dAndRN = reverseNumber(aN);
 		int digit = dAndRN.get(0).intValue();
