@@ -47,6 +47,9 @@ class RomanNumeral{
 		Integer aN = arabicNumeral;
 		List<Integer> dAndRN = reverseNumber(aN);
 		int digit = dAndRN.get(0).intValue();
+		if(digit>4){
+			throw new IllegalArgumentException();
+		}
 		int rN = dAndRN.get(1).intValue();
 		int r;
 		while(rN>0){
