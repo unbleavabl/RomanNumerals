@@ -3,6 +3,7 @@ import java.util.ArrayList;
 class RomanNumeral{
 	private int arabicNumeral;
 	private String romanNumeral = "";
+	private String Rn = "IVXLCDM";
 	public RomanNumeral(Integer number){
 		arabicNumeral = number;
 	}
@@ -22,6 +23,25 @@ class RomanNumeral{
 
 	}
 
+	public String getSubString(int digit,int r){
+		String subString="";
+		if(r == 4){
+			subString += Character.toString(Rn.charAt((digit*2)-2)) + Character.toString(Rn.charAt((digit*2)-1));
+			r -= 4;
+		}
+		else if(r == 9){
+			subString += Character.toString(Rn.charAt((digit*2)-2)) + Character.toString(Rn.charAt(digit*2));
+			r -= 9;
+		}
+		else if(r > 4){
+			subString += Character.toString(Rn.charAt((digit*2)-1));
+			r -= 5;
+		}
+		for (int i = 0; i < r; i++){
+			subString += Character.toString(Rn.charAt((digit*2)-2));	
+		}
+		return subString;
+	}
 
 	public String getRomanNumeral() throws IllegalArgumentException{
 		Integer aN = arabicNumeral;
@@ -31,61 +51,7 @@ class RomanNumeral{
 		int r;
 		while(rN>0){
 			r = rN % 10;
-			switch(digit){
-				case 4 : for(int i = 0;i < r;i++){
-					 	romanNumeral += "M";
-					 }
-					 break;
-				case 3 : if(r == 4){
-					 	romanNumeral += "CD";
-						r -= 4;
-					 }
-					 else if (r == 9){
-					 	romanNumeral += "CM";
-						r -= 9;
-					 }
-					 else if(r > 4){
-					 	romanNumeral += "D";
-						r -= 5;
-					 }
-					 for(int i = 0;i < r;i++){
-					 	romanNumeral += "C";
-					 }
-					 break;
-				case 2 : if(r == 4){
-					 	romanNumeral += "XL";
-						r -= 4;
-					 }
-					 else if (r == 9){
-					 	romanNumeral += "XC";
-						r -= 9;
-					 }
-					 else if (r > 4){
-					 	romanNumeral += "L";
-					 	r -= 5;
-					 }
-					 for(int i = 0;i < r;i++){
-					 	romanNumeral += "X";
-					 }
-					 break;
-				case 1 : if(r == 4){
-					 	romanNumeral += "IV";
-						r -= 4;
-					 }
-					 else if(r == 9){
-					 	romanNumeral += "IX";
-						r -= 9;
-					 }
-					 else if (r > 4){
-					 	romanNumeral += "V";
-						r -= 5;
-					 }
-					 for (int i = 0; i < r;i++){
-					 	romanNumeral += "I";
-					 }
-					 break;
-				default : throw new IllegalArgumentException();
-			}
+			romanNumeral += getSubString(digit,r);
 			digit--;
 			rN = rN/10;
 		}
