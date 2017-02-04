@@ -44,8 +44,7 @@ class RomanNumeral{
 	}
 
 	public String getRomanNumeral() throws IllegalArgumentException{
-		Integer aN = arabicNumeral;
-		List<Integer> dAndRN = reverseNumber(aN);
+		List<Integer> dAndRN = reverseNumber(arabicNumeral);
 		int digit = dAndRN.get(0).intValue();
 		if(digit>4){
 			throw new IllegalArgumentException();
